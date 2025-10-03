@@ -7,13 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06071A992E8FF4BC00578886 /* APODViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071A982E8FF4BC00578886 /* APODViewModelTests.swift */; };
+		06071A9B2E8FF4FC00578886 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071A9A2E8FF4FC00578886 /* NetworkServiceTests.swift */; };
+		06071A9D2E8FF5A800578886 /* CacheServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071A9C2E8FF5A800578886 /* CacheServiceTests.swift */; };
+		06071A9F2E8FF60700578886 /* ImageLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071A9E2E8FF60700578886 /* ImageLoaderTests.swift */; };
+		06071AA12E8FF64D00578886 /* APODModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071AA02E8FF64D00578886 /* APODModelTests.swift */; };
+		06071AA42E8FF6DD00578886 /* MocksClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071AA32E8FF6DD00578886 /* MocksClasses.swift */; };
+		06071AA62E8FFFC000578886 /* NetworkClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06071AA52E8FFFC000578886 /* NetworkClientTests.swift */; };
+		0626FFEB2E8F544D00EF1323 /* NASAAPODAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876032E8DB0490093527D /* NASAAPODAppUITests.swift */; };
+		0626FFEC2E8F545000EF1323 /* NASAAPODAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876052E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift */; };
 		065875E92E8DB0480093527D /* NASAAPODAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065875E82E8DB0480093527D /* NASAAPODAppApp.swift */; };
 		065875EB2E8DB0480093527D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065875EA2E8DB0480093527D /* ContentView.swift */; };
 		065875ED2E8DB0490093527D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065875EC2E8DB0490093527D /* Assets.xcassets */; };
 		065875F02E8DB0490093527D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065875EF2E8DB0490093527D /* Preview Assets.xcassets */; };
-		065875FA2E8DB0490093527D /* NASAAPODAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065875F92E8DB0490093527D /* NASAAPODAppTests.swift */; };
-		065876042E8DB0490093527D /* NASAAPODAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876032E8DB0490093527D /* NASAAPODAppUITests.swift */; };
-		065876062E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876052E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift */; };
+		065876192E8DB1330093527D /* APODDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876182E8DB1330093527D /* APODDetailView.swift */; };
+		0658761B2E8DB1460093527D /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658761A2E8DB1460093527D /* DatePickerView.swift */; };
+		065876212E8DB17C0093527D /* APODViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876202E8DB17C0093527D /* APODViewModel.swift */; };
+		065876272E8DB1B30093527D /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876262E8DB1B30093527D /* APOD.swift */; };
+		065876292E8DD0890093527D /* APODContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876282E8DD0890093527D /* APODContentView.swift */; };
+		0658762C2E8DD5360093527D /* YouTubePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658762B2E8DD5360093527D /* YouTubePlayerView.swift */; };
+		0658762F2E8DDFDE0093527D /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658762E2E8DDFDE0093527D /* NetworkClientProtocol.swift */; };
+		065876312E8DDFED0093527D /* APODServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876302E8DDFED0093527D /* APODServiceProtocol.swift */; };
+		065876332E8DE0000093527D /* APODCacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876322E8DE0000093527D /* APODCacheProtocol.swift */; };
+		065876352E8DE0120093527D /* ImageCacheProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876342E8DE0120093527D /* ImageCacheProtocol.swift */; };
+		065876372E8DE0220093527D /* ImageLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876362E8DE0220093527D /* ImageLoaderProtocol.swift */; };
+		0658763B2E8DE12B0093527D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658763A2E8DE12B0093527D /* NetworkClient.swift */; };
+		0658763D2E8DE13B0093527D /* APODNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658763C2E8DE13B0093527D /* APODNetworkService.swift */; };
+		0658763F2E8DE1490093527D /* APODCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658763E2E8DE1490093527D /* APODCacheService.swift */; };
+		065876412E8DE1570093527D /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876402E8DE1570093527D /* ImageCacheService.swift */; };
+		065876432E8DE1650093527D /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876422E8DE1650093527D /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,16 +56,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06071A982E8FF4BC00578886 /* APODViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODViewModelTests.swift; sourceTree = "<group>"; };
+		06071A9A2E8FF4FC00578886 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		06071A9C2E8FF5A800578886 /* CacheServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceTests.swift; sourceTree = "<group>"; };
+		06071A9E2E8FF60700578886 /* ImageLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderTests.swift; sourceTree = "<group>"; };
+		06071AA02E8FF64D00578886 /* APODModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODModelTests.swift; sourceTree = "<group>"; };
+		06071AA32E8FF6DD00578886 /* MocksClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocksClasses.swift; sourceTree = "<group>"; };
+		06071AA52E8FFFC000578886 /* NetworkClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientTests.swift; sourceTree = "<group>"; };
 		065875E52E8DB0480093527D /* NASAAPODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NASAAPODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065875E82E8DB0480093527D /* NASAAPODAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppApp.swift; sourceTree = "<group>"; };
 		065875EA2E8DB0480093527D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		065875EC2E8DB0490093527D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065875EF2E8DB0490093527D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		065875F52E8DB0490093527D /* NASAAPODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NASAAPODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		065875F92E8DB0490093527D /* NASAAPODAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppTests.swift; sourceTree = "<group>"; };
 		065875FF2E8DB0490093527D /* NASAAPODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NASAAPODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		065876032E8DB0490093527D /* NASAAPODAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppUITests.swift; sourceTree = "<group>"; };
 		065876052E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		065876182E8DB1330093527D /* APODDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDetailView.swift; sourceTree = "<group>"; };
+		0658761A2E8DB1460093527D /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		065876202E8DB17C0093527D /* APODViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODViewModel.swift; sourceTree = "<group>"; };
+		065876262E8DB1B30093527D /* APOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
+		065876282E8DD0890093527D /* APODContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODContentView.swift; sourceTree = "<group>"; };
+		0658762B2E8DD5360093527D /* YouTubePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayerView.swift; sourceTree = "<group>"; };
+		0658762E2E8DDFDE0093527D /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
+		065876302E8DDFED0093527D /* APODServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODServiceProtocol.swift; sourceTree = "<group>"; };
+		065876322E8DE0000093527D /* APODCacheProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODCacheProtocol.swift; sourceTree = "<group>"; };
+		065876342E8DE0120093527D /* ImageCacheProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheProtocol.swift; sourceTree = "<group>"; };
+		065876362E8DE0220093527D /* ImageLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderProtocol.swift; sourceTree = "<group>"; };
+		0658763A2E8DE12B0093527D /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		0658763C2E8DE13B0093527D /* APODNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODNetworkService.swift; sourceTree = "<group>"; };
+		0658763E2E8DE1490093527D /* APODCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODCacheService.swift; sourceTree = "<group>"; };
+		065876402E8DE1570093527D /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
+		065876422E8DE1650093527D /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06071AA22E8FF6AD00578886 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				06071AA32E8FF6DD00578886 /* MocksClasses.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		065875DC2E8DB0480093527D = {
 			isa = PBXGroup;
 			children = (
@@ -94,8 +146,12 @@
 		065875E72E8DB0480093527D /* NASAAPODApp */ = {
 			isa = PBXGroup;
 			children = (
+				0658762D2E8DDFB60093527D /* Protocols */,
+				065876152E8DB0B90093527D /* Views */,
+				065876142E8DB0AA0093527D /* ViewModels */,
+				065876132E8DB0920093527D /* Services */,
+				065876122E8DB0880093527D /* Models */,
 				065875E82E8DB0480093527D /* NASAAPODAppApp.swift */,
-				065875EA2E8DB0480093527D /* ContentView.swift */,
 				065875EC2E8DB0490093527D /* Assets.xcassets */,
 				065875EE2E8DB0490093527D /* Preview Content */,
 			);
@@ -113,7 +169,13 @@
 		065875F82E8DB0490093527D /* NASAAPODAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				065875F92E8DB0490093527D /* NASAAPODAppTests.swift */,
+				06071AA22E8FF6AD00578886 /* Mocks */,
+				06071A982E8FF4BC00578886 /* APODViewModelTests.swift */,
+				06071A9A2E8FF4FC00578886 /* NetworkServiceTests.swift */,
+				06071A9C2E8FF5A800578886 /* CacheServiceTests.swift */,
+				06071A9E2E8FF60700578886 /* ImageLoaderTests.swift */,
+				06071AA02E8FF64D00578886 /* APODModelTests.swift */,
+				06071AA52E8FFFC000578886 /* NetworkClientTests.swift */,
 			);
 			path = NASAAPODAppTests;
 			sourceTree = "<group>";
@@ -125,6 +187,58 @@
 				065876052E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift */,
 			);
 			path = NASAAPODAppUITests;
+			sourceTree = "<group>";
+		};
+		065876122E8DB0880093527D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				065876262E8DB1B30093527D /* APOD.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		065876132E8DB0920093527D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0658763A2E8DE12B0093527D /* NetworkClient.swift */,
+				0658763C2E8DE13B0093527D /* APODNetworkService.swift */,
+				0658763E2E8DE1490093527D /* APODCacheService.swift */,
+				065876402E8DE1570093527D /* ImageCacheService.swift */,
+				065876422E8DE1650093527D /* ImageLoader.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		065876142E8DB0AA0093527D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				065876202E8DB17C0093527D /* APODViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		065876152E8DB0B90093527D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				065875EA2E8DB0480093527D /* ContentView.swift */,
+				065876182E8DB1330093527D /* APODDetailView.swift */,
+				0658761A2E8DB1460093527D /* DatePickerView.swift */,
+				065876282E8DD0890093527D /* APODContentView.swift */,
+				0658762B2E8DD5360093527D /* YouTubePlayerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0658762D2E8DDFB60093527D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0658762E2E8DDFDE0093527D /* NetworkClientProtocol.swift */,
+				065876302E8DDFED0093527D /* APODServiceProtocol.swift */,
+				065876322E8DE0000093527D /* APODCacheProtocol.swift */,
+				065876342E8DE0120093527D /* ImageCacheProtocol.swift */,
+				065876362E8DE0220093527D /* ImageLoaderProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +312,7 @@
 					};
 					065875F42E8DB0490093527D = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 						TestTargetID = 065875E42E8DB0480093527D;
 					};
 					065875FE2E8DB0490093527D = {
@@ -257,7 +372,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0658763F2E8DE1490093527D /* APODCacheService.swift in Sources */,
+				065876372E8DE0220093527D /* ImageLoaderProtocol.swift in Sources */,
+				065876332E8DE0000093527D /* APODCacheProtocol.swift in Sources */,
+				0658763D2E8DE13B0093527D /* APODNetworkService.swift in Sources */,
+				065876212E8DB17C0093527D /* APODViewModel.swift in Sources */,
 				065875EB2E8DB0480093527D /* ContentView.swift in Sources */,
+				065876352E8DE0120093527D /* ImageCacheProtocol.swift in Sources */,
+				065876272E8DB1B30093527D /* APOD.swift in Sources */,
+				065876412E8DE1570093527D /* ImageCacheService.swift in Sources */,
+				065876432E8DE1650093527D /* ImageLoader.swift in Sources */,
+				065876192E8DB1330093527D /* APODDetailView.swift in Sources */,
+				0658762F2E8DDFDE0093527D /* NetworkClientProtocol.swift in Sources */,
+				065876312E8DDFED0093527D /* APODServiceProtocol.swift in Sources */,
+				065876292E8DD0890093527D /* APODContentView.swift in Sources */,
+				0658761B2E8DB1460093527D /* DatePickerView.swift in Sources */,
+				0658763B2E8DE12B0093527D /* NetworkClient.swift in Sources */,
+				0658762C2E8DD5360093527D /* YouTubePlayerView.swift in Sources */,
 				065875E92E8DB0480093527D /* NASAAPODAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,7 +397,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065875FA2E8DB0490093527D /* NASAAPODAppTests.swift in Sources */,
+				06071AA42E8FF6DD00578886 /* MocksClasses.swift in Sources */,
+				06071A9B2E8FF4FC00578886 /* NetworkServiceTests.swift in Sources */,
+				06071A992E8FF4BC00578886 /* APODViewModelTests.swift in Sources */,
+				06071A9F2E8FF60700578886 /* ImageLoaderTests.swift in Sources */,
+				06071AA12E8FF64D00578886 /* APODModelTests.swift in Sources */,
+				06071A9D2E8FF5A800578886 /* CacheServiceTests.swift in Sources */,
+				06071AA62E8FFFC000578886 /* NetworkClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065876042E8DB0490093527D /* NASAAPODAppUITests.swift in Sources */,
-				065876062E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift in Sources */,
+				0626FFEB2E8F544D00EF1323 /* NASAAPODAppUITests.swift in Sources */,
+				0626FFEC2E8F545000EF1323 /* NASAAPODAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +561,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NASAAPODApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NASAAPODApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -434,6 +573,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NASA_API_KEY = IQD0DXygcAVsepjKDlOnAiS8mjHBV31UllAqv8co;
 				PRODUCT_BUNDLE_IDENTIFIER = com.praveen.NASAAPODApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -452,6 +592,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NASAAPODApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NASAAPODApp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -462,6 +604,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NASA_API_KEY = IQD0DXygcAVsepjKDlOnAiS8mjHBV31UllAqv8co;
 				PRODUCT_BUNDLE_IDENTIFIER = com.praveen.NASAAPODApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -475,6 +618,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -483,6 +627,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.praveen.NASAAPODAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NASAAPODApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/NASAAPODApp";
@@ -494,6 +639,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
