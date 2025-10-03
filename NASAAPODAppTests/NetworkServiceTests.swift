@@ -14,7 +14,7 @@ final class NetworkServiceTests: XCTestCase {
     override func setUp() {
         super.setUp()
         mockClient = MockNetworkClient()
-        networkService = APODNetworkService(client: mockClient, apiKey: "TEST_KEY")
+        networkService = APODNetworkService(client: mockClient)
     }
     
     override func tearDown() {
