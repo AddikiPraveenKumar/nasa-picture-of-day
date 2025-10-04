@@ -15,7 +15,6 @@ struct APODDetailView: View {
                 .navigationTitle("Astronomy Picture")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
-                    // Only load if we don't have data already
                         Task {
                             await viewModel.loadTodayAPOD()
                         }
