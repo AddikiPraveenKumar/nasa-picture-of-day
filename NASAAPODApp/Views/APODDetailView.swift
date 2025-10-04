@@ -14,15 +14,11 @@ struct APODDetailView: View {
             APODContentView(viewModel: viewModel, showDateBadge: false)
                 .navigationTitle("Astronomy Picture")
                 .navigationBarTitleDisplayMode(.inline)
-                .animation(.easeInOut(duration: 0.2), value: viewModel.currentAPOD)
-                .animation(.easeInOut(duration: 0.2), value: viewModel.isLoading)
                 .onAppear {
                     // Only load if we don't have data already
-                    if viewModel.currentAPOD == nil && !viewModel.isLoading {
                         Task {
                             await viewModel.loadTodayAPOD()
                         }
-                    }
                 }
         }
         .navigationViewStyle(.stack)

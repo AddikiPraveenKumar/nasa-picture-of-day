@@ -38,6 +38,13 @@
 		065876432E8DE1650093527D /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876422E8DE1650093527D /* ImageLoader.swift */; };
 		06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E422E91592700CAD94F /* Date+Extension.swift */; };
 		06B23E452E9159AA00CAD94F /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E442E9159A200CAD94F /* MediaType.swift */; };
+		06B23E482E9190A400CAD94F /* APODEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */; };
+		06B23E4A2E9190BE00CAD94F /* APODErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */; };
+		06B23E4C2E9190D400CAD94F /* APODExplanationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */; };
+		06B23E4E2E9190EC00CAD94F /* APODMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */; };
+		06B23E502E91911600CAD94F /* APODDateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4F2E91911600CAD94F /* APODDateBadge.swift */; };
+		06B23E522E91912A00CAD94F /* APODErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E512E91912A00CAD94F /* APODErrorBanner.swift */; };
+		06B23E542E91914D00CAD94F /* APODLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E532E91914D00CAD94F /* APODLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +99,13 @@
 		065876422E8DE1650093527D /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		06B23E422E91592700CAD94F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		06B23E442E9159A200CAD94F /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODEmptyStateView.swift; sourceTree = "<group>"; };
+		06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorStateView.swift; sourceTree = "<group>"; };
+		06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODExplanationSection.swift; sourceTree = "<group>"; };
+		06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODMediaView.swift; sourceTree = "<group>"; };
+		06B23E4F2E91911600CAD94F /* APODDateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDateBadge.swift; sourceTree = "<group>"; };
+		06B23E512E91912A00CAD94F /* APODErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorBanner.swift; sourceTree = "<group>"; };
+		06B23E532E91914D00CAD94F /* APODLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODLoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +241,13 @@
 		065876152E8DB0B90093527D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				06B23E532E91914D00CAD94F /* APODLoadingView.swift */,
+				06B23E512E91912A00CAD94F /* APODErrorBanner.swift */,
+				06B23E4F2E91911600CAD94F /* APODDateBadge.swift */,
+				06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */,
+				06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */,
+				06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */,
+				06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */,
 				065875EA2E8DB0480093527D /* HomeView.swift */,
 				065876182E8DB1330093527D /* APODDetailView.swift */,
 				065876282E8DD0890093527D /* APODContentView.swift */,
@@ -398,18 +419,25 @@
 				0658763F2E8DE1490093527D /* APODCacheService.swift in Sources */,
 				065876372E8DE0220093527D /* ImageLoaderProtocol.swift in Sources */,
 				065876332E8DE0000093527D /* APODCacheProtocol.swift in Sources */,
+				06B23E522E91912A00CAD94F /* APODErrorBanner.swift in Sources */,
 				0658763D2E8DE13B0093527D /* APODNetworkService.swift in Sources */,
+				06B23E4E2E9190EC00CAD94F /* APODMediaView.swift in Sources */,
 				065876212E8DB17C0093527D /* APODViewModel.swift in Sources */,
 				065875EB2E8DB0480093527D /* HomeView.swift in Sources */,
+				06B23E482E9190A400CAD94F /* APODEmptyStateView.swift in Sources */,
 				065876352E8DE0120093527D /* ImageCacheProtocol.swift in Sources */,
+				06B23E502E91911600CAD94F /* APODDateBadge.swift in Sources */,
 				065876272E8DB1B30093527D /* APOD.swift in Sources */,
 				065876412E8DE1570093527D /* ImageCacheService.swift in Sources */,
 				065876432E8DE1650093527D /* ImageLoader.swift in Sources */,
 				065876192E8DB1330093527D /* APODDetailView.swift in Sources */,
 				0658762F2E8DDFDE0093527D /* NetworkClientProtocol.swift in Sources */,
 				065876312E8DDFED0093527D /* APODServiceProtocol.swift in Sources */,
+				06B23E4C2E9190D400CAD94F /* APODExplanationSection.swift in Sources */,
+				06B23E4A2E9190BE00CAD94F /* APODErrorStateView.swift in Sources */,
 				065876292E8DD0890093527D /* APODContentView.swift in Sources */,
 				0658761B2E8DB1460093527D /* DatePickerView.swift in Sources */,
+				06B23E542E91914D00CAD94F /* APODLoadingView.swift in Sources */,
 				0658763B2E8DE12B0093527D /* NetworkClient.swift in Sources */,
 				0658762C2E8DD5360093527D /* VideoPlayerView.swift in Sources */,
 				06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */,
