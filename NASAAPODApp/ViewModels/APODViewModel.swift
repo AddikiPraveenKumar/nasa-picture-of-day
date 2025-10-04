@@ -45,39 +45,37 @@ class APODViewModel: ObservableObject {
     func loadAPOD(for date: Date?) async {
         isLoading = true
         errorMessage = nil
+        cachedImage = nil // Clear previous image
         
         do {
-            // Try to fetch from API
             let apod = try await apodService.fetchAPOD(for: date)
             currentAPOD = apod
-            
-            // Cache APOD data
             try? apodCache.save(apod)
-            
             isLoading = false
             
-            // Load and cache image (if not video)
+            // Load image concurrently
             if !apod.isVideo, let imageURL = apod.imageURL {
-                isLoadingImage = true
-                cachedImage = await imageLoader.loadImage(from: imageURL)
-                isLoadingImage = false
+                Task {
+                    isLoadingImage = true
+                    cachedImage = await imageLoader.loadImage(from: imageURL)
+                    isLoadingImage = false
+                }
             }
-            
         } catch {
-            // Service call failed - load from cache
-            errorMessage = error.localizedDescription
-            
-            // Load cached APOD
-            if let cached = apodCache.load() {
-                currentAPOD = cached
-                
-                // Load cached image
-                if !cached.isVideo, let imageURL = cached.imageURL {
+            handleError(error)
+        }
+    }
+
+    private func handleError(_ error: Error) {
+        errorMessage = error.localizedDescription
+        if let cached = apodCache.load() {
+            currentAPOD = cached
+            if !cached.isVideo, let imageURL = cached.imageURL {
+                Task {
                     cachedImage = await imageLoader.loadImage(from: imageURL)
                 }
             }
-            
-            isLoading = false
         }
+        isLoading = false
     }
 }

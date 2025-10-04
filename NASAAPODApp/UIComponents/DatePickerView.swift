@@ -73,6 +73,8 @@ struct DatePickerView: View {
                         .cornerRadius(12)
                     }
                     .disabled(viewModel.isLoading)
+                    .accessibilityLabel("Load astronomy picture for selected date")
+                    .accessibilityHint(viewModel.isLoading ? "Loading" : "Double tap to load")
                 }
                 .padding()
                 .background(Color(uiColor: .systemBackground))
@@ -83,7 +85,6 @@ struct DatePickerView: View {
             }
             .navigationTitle("Browse APOD")
             .animation(.spring(response: 0.3), value: showDatePicker)
-            .animation(.spring(response: 0.3), value: viewModel.currentAPOD)
         }
         .navigationViewStyle(.stack)
     }

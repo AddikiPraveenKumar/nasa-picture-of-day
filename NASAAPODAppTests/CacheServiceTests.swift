@@ -35,7 +35,7 @@ final class CacheServiceTests: XCTestCase {
             title: "Test Title",
             explanation: "Test Explanation",
             url: "https://example.com/image.jpg",
-            mediaType: "image",
+            mediaType: .image,
             hdurl: "https://example.com/hd.jpg"
         )
         
@@ -65,7 +65,7 @@ final class CacheServiceTests: XCTestCase {
             title: "First",
             explanation: "First",
             url: "https://example.com/1.jpg",
-            mediaType: "image",
+            mediaType: .image,
             hdurl: nil
         )
         let secondAPOD = APOD(
@@ -73,7 +73,7 @@ final class CacheServiceTests: XCTestCase {
             title: "Second",
             explanation: "Second",
             url: "https://example.com/2.jpg",
-            mediaType: "image",
+            mediaType: .image,
             hdurl: nil
         )
         
@@ -132,7 +132,7 @@ final class CacheServiceTests: XCTestCase {
             title: "Test",
             explanation: "Test",
             url: "https://example.com/image.jpg",
-            mediaType: "image",
+            mediaType: .image,
             hdurl: nil
         )
         
@@ -163,7 +163,7 @@ final class CacheServiceTests: XCTestCase {
             title: "Video APOD",
             explanation: "Video explanation",
             url: "https://youtube.com/watch?v=test",
-            mediaType: "video",
+            mediaType: .video,
             hdurl: nil
         )
         
@@ -173,7 +173,7 @@ final class CacheServiceTests: XCTestCase {
         
         // Then
         XCTAssertNotNil(loaded)
-        XCTAssertEqual(loaded?.mediaType, "video")
+        XCTAssertEqual(loaded?.mediaType, .video)
         XCTAssertTrue(loaded?.isVideo ?? false)
     }
 }

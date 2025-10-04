@@ -16,6 +16,16 @@ class NetworkClient: NetworkClientProtocol {
     func performRequest(url: URL) async throws -> (Data, URLResponse) {
         do {
             return try await session.data(from: url)
+        } catch let urlError as URLError {
+            // Handle specific URL errors
+            switch urlError.code {
+            case .notConnectedToInternet, .networkConnectionLost:
+                throw NetworkError.networkError(urlError)
+            case .timedOut:
+                throw NetworkError.networkError(urlError)
+            default:
+                throw NetworkError.networkError(urlError)
+            }
         } catch {
             throw NetworkError.networkError(error)
         }

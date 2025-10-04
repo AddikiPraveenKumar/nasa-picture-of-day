@@ -150,6 +150,7 @@
 		065875E72E8DB0480093527D /* NASAAPODApp */ = {
 			isa = PBXGroup;
 			children = (
+				06B23E462E91704D00CAD94F /* UIComponents */,
 				06B23E412E91590C00CAD94F /* Extensions */,
 				0658762D2E8DDFB60093527D /* Protocols */,
 				065876152E8DB0B90093527D /* Views */,
@@ -228,9 +229,7 @@
 			children = (
 				065875EA2E8DB0480093527D /* HomeView.swift */,
 				065876182E8DB1330093527D /* APODDetailView.swift */,
-				0658761A2E8DB1460093527D /* DatePickerView.swift */,
 				065876282E8DD0890093527D /* APODContentView.swift */,
-				0658762B2E8DD5360093527D /* VideoPlayerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +252,15 @@
 				06B23E422E91592700CAD94F /* Date+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		06B23E462E91704D00CAD94F /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				0658761A2E8DB1460093527D /* DatePickerView.swift */,
+				0658762B2E8DD5360093527D /* VideoPlayerView.swift */,
+			);
+			path = UIComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,3 +1,9 @@
+//
+//  ImageCacheService.swift
+//  NASAAPODApp
+//
+//  Created by Praveen UK on 01/10/2025.
+//
 import UIKit
 
 class ImageCacheService: ImageCacheProtocol {
@@ -14,10 +20,6 @@ class ImageCacheService: ImageCacheProtocol {
         
         return imageDir
     }()
-    
-    init(countLimit: Int = 50, costLimit: Int = 100_000_000) {
-        // Empty - no NSCache needed!
-    }
     
     func save(_ image: UIImage, forKey key: String) {
         // Just save to disk - no memory cache

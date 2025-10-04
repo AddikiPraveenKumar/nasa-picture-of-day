@@ -82,6 +82,10 @@ class APODNetworkService: APODServiceProtocol {
         var queryItems = [URLQueryItem(name: "api_key", value: ConfigManager.nasaAPIKey)]
         
         if let date = date {
+            // Validate date is not in the future
+            if date > Date() {
+                return nil
+            }
             queryItems.append(URLQueryItem(name: "date", value: date.toString()))
         }
         
