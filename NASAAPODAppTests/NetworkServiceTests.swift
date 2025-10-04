@@ -49,7 +49,7 @@ final class NetworkServiceTests: XCTestCase {
         
         // Then
         XCTAssertEqual(apod.title, "Test APOD")
-        XCTAssertEqual(apod.mediaType, "image")
+        XCTAssertEqual(apod.mediaType, .image)
         XCTAssertFalse(apod.isVideo)
     }
     
@@ -76,7 +76,7 @@ final class NetworkServiceTests: XCTestCase {
         let apod = try await networkService.fetchAPOD(for: nil)
         
         // Then
-        XCTAssertEqual(apod.mediaType, "video")
+        XCTAssertEqual(apod.mediaType, .video)
         XCTAssertTrue(apod.isVideo)
         XCTAssertNotNil(apod.videoURL)
     }

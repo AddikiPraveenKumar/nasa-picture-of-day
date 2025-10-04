@@ -38,7 +38,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadTodayAPOD_Success() async {
         // Given
-        let expectedAPOD = createTestAPOD(title: "Test APOD", mediaType: "image")
+        let expectedAPOD = createTestAPOD(title: "Test APOD", mediaType: .image)
         let expectedImage = createTestImage()
         mockAPODService.apodToReturn = expectedAPOD
         mockImageLoader.imageToReturn = expectedImage
@@ -49,6 +49,7 @@ final class APODViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(viewModel.currentAPOD, expectedAPOD)
         XCTAssertFalse(viewModel.isLoading)
+        XCTAssertFalse(viewModel.isLoadingImage)
         XCTAssertNil(viewModel.errorMessage)
         XCTAssertEqual(viewModel.cachedImage, expectedImage)
         XCTAssertTrue(mockAPODCache.saveCalled)
@@ -59,8 +60,10 @@ final class APODViewModelTests: XCTestCase {
     func testLoadAPOD_ForSpecificDate_Success() async {
         // Given
         let specificDate = Date(timeIntervalSince1970: 1609459200) // 2021-01-01
-        let expectedAPOD = createTestAPOD(title: "New Year APOD", mediaType: "image")
+        let expectedAPOD = createTestAPOD(title: "New Year APOD", mediaType: .image)
+        let expectedImage = createTestImage()
         mockAPODService.apodToReturn = expectedAPOD
+        mockImageLoader.imageToReturn = expectedImage
         
         // When
         await viewModel.loadAPOD(for: specificDate)
@@ -68,12 +71,13 @@ final class APODViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(viewModel.currentAPOD, expectedAPOD)
         XCTAssertEqual(mockAPODService.requestedDate, specificDate)
+        XCTAssertTrue(mockImageLoader.loadCalled)
     }
     
     @MainActor
     func testLoadAPOD_VideoType_SkipsImageLoad() async {
         // Given
-        let videoAPOD = createTestAPOD(title: "Video APOD", mediaType: "video")
+        let videoAPOD = createTestAPOD(title: "Video APOD", mediaType: .video)
         mockAPODService.apodToReturn = videoAPOD
         
         // When
@@ -90,7 +94,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_NetworkFails_LoadsCachedData() async {
         // Given - This is the main requirement test!
-        let cachedAPOD = createTestAPOD(title: "Cached APOD", mediaType: "image")
+        let cachedAPOD = createTestAPOD(title: "Cached APOD", mediaType: .image)
         let cachedImage = createTestImage()
         
         mockAPODService.shouldFail = true
@@ -102,8 +106,8 @@ final class APODViewModelTests: XCTestCase {
         
         // Then
         XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertEqual(viewModel.currentAPOD, cachedAPOD) // ← Cache loaded
-        XCTAssertEqual(viewModel.cachedImage, cachedImage) // ← Image loaded
+        XCTAssertEqual(viewModel.currentAPOD, cachedAPOD) // Cache loaded
+        XCTAssertEqual(viewModel.cachedImage, cachedImage) // Image loaded
         XCTAssertTrue(mockAPODCache.loadCalled)
         XCTAssertTrue(mockImageLoader.loadCalled)
     }
@@ -126,7 +130,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_SubsequentCallFails_ShowsPreviousCache() async {
         // Given - Test "any subsequent service call fails"
-        let firstAPOD = createTestAPOD(title: "First APOD", mediaType: "image")
+        let firstAPOD = createTestAPOD(title: "First APOD", mediaType: .image)
         let firstImage = createTestImage()
         
         // First successful call
@@ -154,8 +158,9 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_SetsLoadingState() async {
         // Given
-        mockAPODService.delay = 0.5
-        mockAPODService.apodToReturn = createTestAPOD(title: "Test", mediaType: "image")
+        mockAPODService.delay = 0.1
+        mockAPODService.apodToReturn = createTestAPOD(title: "Test", mediaType: .image)
+        mockImageLoader.imageToReturn = createTestImage()
         
         // When
         let loadTask = Task {
@@ -163,7 +168,7 @@ final class APODViewModelTests: XCTestCase {
         }
         
         // Small delay to check loading state
-        try? await Task.sleep(nanoseconds: 100_000_000)
+        try? await Task.sleep(nanoseconds: 50_000_000)
         
         // Then
         XCTAssertTrue(viewModel.isLoading)
@@ -175,9 +180,9 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_ImageLoadingSetsState() async {
         // Given
-        let apod = createTestAPOD(title: "Test", mediaType: "image")
+        let apod = createTestAPOD(title: "Test", mediaType: .image)
         mockAPODService.apodToReturn = apod
-        mockImageLoader.delay = 0.5
+        mockImageLoader.delay = 0.1
         mockImageLoader.imageToReturn = createTestImage()
         
         // When
@@ -187,16 +192,19 @@ final class APODViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.isLoadingImage) // Should be false after completion
     }
     
-    // MARK: - Helper Methods
+    // MARK: - Helper Methods - FIXED: Now uses MediaType enum
     
-    private func createTestAPOD(title: String, mediaType: String) -> APOD {
+    private func createTestAPOD(
+        title: String,
+        mediaType: MediaType  // ← Changed from String to MediaType
+    ) -> APOD {
         APOD(
             date: "2024-01-01",
             title: title,
             explanation: "Test explanation",
             url: "https://example.com/image.jpg",
-            mediaType: mediaType,
-            hdurl: "https://example.com/hd.jpg"
+            mediaType: mediaType,  // ← Now uses the parameter!
+            hdurl: mediaType == .image ? "https://example.com/hd.jpg" : nil
         )
     }
     
@@ -209,7 +217,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_CachedVideoOnFailure() async {
         // Given
-        let cachedVideoAPOD = createTestAPOD(title: "Cached Video", mediaType: "video")
+        let cachedVideoAPOD = createTestAPOD(title: "Cached Video", mediaType: .video)
         mockAPODService.shouldFail = true
         mockAPODCache.cachedAPOD = cachedVideoAPOD
         
@@ -231,7 +239,7 @@ final class APODViewModelTests: XCTestCase {
             title: "No Image URL",
             explanation: "Test",
             url: "",
-            mediaType: "image",
+            mediaType: .image,
             hdurl: nil
         )
         mockAPODService.apodToReturn = apodNoURL
@@ -247,7 +255,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadAPOD_CacheSaveError() async {
         // Given
-        let testAPOD = createTestAPOD(title: "Test", mediaType: "image")
+        let testAPOD = createTestAPOD(title: "Test", mediaType: .image)
         mockAPODService.apodToReturn = testAPOD
         mockImageLoader.imageToReturn = createTestImage()
         
@@ -262,7 +270,7 @@ final class APODViewModelTests: XCTestCase {
     @MainActor
     func testLoadTodayAPOD_CallsLoadAPODWithNilDate() async {
         // Given
-        let testAPOD = createTestAPOD(title: "Today", mediaType: "image")
+        let testAPOD = createTestAPOD(title: "Today", mediaType: .image)
         mockAPODService.apodToReturn = testAPOD
         mockImageLoader.imageToReturn = createTestImage()
         

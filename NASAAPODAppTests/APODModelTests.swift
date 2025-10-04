@@ -17,7 +17,7 @@ final class APODModelTests: XCTestCase {
                 title: "Test",
                 explanation: "Test",
                 url: "https://example.com/image.jpg",
-                mediaType: "image",
+                mediaType: .image,
                 hdurl: "https://example.com/hd.jpg"
             )
             
@@ -34,7 +34,7 @@ final class APODModelTests: XCTestCase {
                 title: "Video",
                 explanation: "Video",
                 url: "https://youtube.com/watch?v=test",
-                mediaType: "video",
+                mediaType: .video,
                 hdurl: nil
             )
             
@@ -50,7 +50,7 @@ final class APODModelTests: XCTestCase {
                 title: "Test",
                 explanation: "Test",
                 url: "https://example.com/standard.jpg",
-                mediaType: "image",
+                mediaType: .image,
                 hdurl: "https://example.com/hd.jpg"
             )
             
@@ -65,7 +65,7 @@ final class APODModelTests: XCTestCase {
                 title: "Test",
                 explanation: "Test",
                 url: "https://example.com/standard.jpg",
-                mediaType: "image",
+                mediaType: .image,
                 hdurl: nil
             )
             
@@ -80,7 +80,7 @@ final class APODModelTests: XCTestCase {
                 title: "Test",
                 explanation: "Test",
                 url: "https://example.com/image.jpg",
-                mediaType: "image",
+                mediaType: .image,
                 hdurl: nil
             )
             let apod2 = APOD(
@@ -88,7 +88,7 @@ final class APODModelTests: XCTestCase {
                 title: "Test",
                 explanation: "Test",
                 url: "https://example.com/image.jpg",
-                mediaType: "image",
+                mediaType: .image,
                 hdurl: nil
             )
             
