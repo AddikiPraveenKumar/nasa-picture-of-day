@@ -43,6 +43,7 @@
 		06B23E622E919FA500CAD94F /* APODDateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E612E919FA500CAD94F /* APODDateBadge.swift */; };
 		06B23E642E919FF800CAD94F /* APODErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E632E919FF800CAD94F /* APODErrorBanner.swift */; };
 		06B23E662E91A01600CAD94F /* APODLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E652E91A01600CAD94F /* APODLoadingView.swift */; };
+		06B23E6C2E91A75600CAD94F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 06B23E6B2E91A75600CAD94F /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		06B23E612E919FA500CAD94F /* APODDateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDateBadge.swift; sourceTree = "<group>"; };
 		06B23E632E919FF800CAD94F /* APODErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorBanner.swift; sourceTree = "<group>"; };
 		06B23E652E91A01600CAD94F /* APODLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODLoadingView.swift; sourceTree = "<group>"; };
+		06B23E6B2E91A75600CAD94F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		065875DC2E8DB0480093527D = {
 			isa = PBXGroup;
 			children = (
+				06B23E6B2E91A75600CAD94F /* README.md */,
 				065875E72E8DB0480093527D /* NASAAPODApp */,
 				065875F82E8DB0490093527D /* NASAAPODAppTests */,
 				065876022E8DB0490093527D /* NASAAPODAppUITests */,
@@ -383,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06B23E6C2E91A75600CAD94F /* README.md in Resources */,
 				065875F02E8DB0490093527D /* Preview Assets.xcassets in Resources */,
 				065875ED2E8DB0490093527D /* Assets.xcassets in Resources */,
 			);
