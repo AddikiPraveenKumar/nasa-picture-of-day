@@ -28,7 +28,7 @@ Tests/          - Unit tests
 ## How to Extend This
 
 
-**1. Add New Endpoints **
+**1. Add New Endpoints**
 
 In the `APIEndpoint` enum, just add a new case:
 
