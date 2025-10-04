@@ -132,7 +132,7 @@ struct APODContentView: View {
     private func mediaView(for apod: APOD) -> some View {
         Group {
             if apod.isVideo, let videoURL = apod.videoURL {
-                YouTubePlayerView(url: videoURL)
+                VideoPlayerView(url: videoURL)
                     .frame(height: showDateBadge ? 250 : 300)
                     .cornerRadius(12)
                     .padding(.horizontal)

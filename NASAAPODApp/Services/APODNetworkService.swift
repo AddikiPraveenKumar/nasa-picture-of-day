@@ -6,16 +6,44 @@
 //
 
 import Foundation
+
+// MARK: - HTTP Status Code
+enum HTTPStatusCode: Int {
+    case success = 200
+    case badRequest = 400
+    case unauthorized = 401
+    case tooManyRequests = 429
+    case serverError = 500
+    
+    var isSuccess: Bool {
+        return (200...299).contains(rawValue)
+    }
+}
+
+// MARK: - API Endpoints This Created for feature End points
+enum APIEndpoint {
+    case apod
+    
+    var path: String {
+        switch self {
+        case .apod:
+            return "/apod"
+        }
+    }
+}
+
+// MARK: - Network Service
 class APODNetworkService: APODServiceProtocol {
     private let client: NetworkClientProtocol
-    private let baseURL = "https://api.nasa.gov/planetary/apod"
+    private let baseURL: String
     
     init(client: NetworkClientProtocol) {
         self.client = client
+        self.baseURL = ConfigManager.apiBaseURL
     }
     
     func fetchAPOD(for date: Date?) async throws -> APOD {
-        guard let url = buildURL(for: date) else {
+        guard let url = buildURL(for: .apod, date: date) else {
             throw NetworkError.invalidURL
         }
         print("+++++\(url)")
@@ -25,12 +53,19 @@ class APODNetworkService: APODServiceProtocol {
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.noData
         }
+        
         print(httpResponse.statusCode)
-        if httpResponse.statusCode == 400 {
-            throw NetworkError.invalidDate  // New error type
-        } else if httpResponse.statusCode == 429 {
-            throw NetworkError.rateLimitExceeded  // New error type
-        } else if !(200...299).contains(httpResponse.statusCode) {
+        
+        let statusCode = HTTPStatusCode(rawValue: httpResponse.statusCode)
+        
+        switch statusCode {
+        case .badRequest:
+            throw NetworkError.invalidDate
+        case .tooManyRequests:
+            throw NetworkError.rateLimitExceeded
+        case .some(let code) where code.isSuccess:
+            break // Success, continue to decode
+        default:
             throw NetworkError.serverError(statusCode: httpResponse.statusCode)
         }
         
@@ -41,14 +76,13 @@ class APODNetworkService: APODServiceProtocol {
         }
     }
     
-    private func buildURL(for date: Date?) -> URL? {
-        var components = URLComponents(string: baseURL)
-        var queryItems = [URLQueryItem(name: "api_key", value: KeyConfig.nasaAPIKey)]
+    private func buildURL(for endpoint: APIEndpoint, date: Date?) -> URL? {
+        let fullURLString = baseURL + endpoint.path
+        var components = URLComponents(string: fullURLString)
+        var queryItems = [URLQueryItem(name: "api_key", value: ConfigManager.nasaAPIKey)]
         
         if let date = date {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            queryItems.append(URLQueryItem(name: "date", value: formatter.string(from: date)))
+            queryItems.append(URLQueryItem(name: "date", value: date.toString()))
         }
         
         components?.queryItems = queryItems
@@ -56,8 +90,15 @@ class APODNetworkService: APODServiceProtocol {
     }
 }
 
-
-struct KeyConfig {
+// MARK: - Configuration Manager
+struct ConfigManager {
+    static var apiBaseURL: String {
+        guard let url = Bundle.main.infoDictionary?["API_BASE_URL"] as? String else {
+            fatalError("API_BASE_URL not set in build configuration")
+        }
+        return url
+    }
+    
     static var nasaAPIKey: String {
         guard let key = Bundle.main.infoDictionary?["NASA_API_KEY"] as? String else {
             fatalError("NASA_API_KEY not set in build configuration")

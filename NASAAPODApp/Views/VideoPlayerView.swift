@@ -8,7 +8,7 @@ import SwiftUI
 import AVKit
 import WebKit
 
-struct YouTubePlayerView: UIViewRepresentable {
+struct VideoPlayerView: UIViewRepresentable {
     let url: URL
     func makeCoordinator() -> WebViewCoordinator {
         WebViewCoordinator()

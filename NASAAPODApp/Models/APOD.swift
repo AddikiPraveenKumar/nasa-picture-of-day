@@ -11,7 +11,7 @@ struct APOD: Codable, Equatable {
     let title: String
     let explanation: String
     let url: String
-    let mediaType: String
+    let mediaType: MediaType
     let hdurl: String?
     
     enum CodingKeys: String, CodingKey {
@@ -21,7 +21,7 @@ struct APOD: Codable, Equatable {
     }
     
     var isVideo: Bool {
-        mediaType == "video"
+        mediaType == .video
     }
     
     var imageURL: URL? {

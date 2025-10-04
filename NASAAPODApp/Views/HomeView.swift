@@ -7,16 +7,7 @@
 
 import SwiftUI
 
-//
-//  ContentView.swift
-//  NASAAPODApp
-//
-//  Created by Praveen UK on 01/10/2025.
-//
-
-import SwiftUI
-
-struct ContentView: View {
+struct HomeView: View {
     var body: some View {
         TabView {
             APODDetailView()
@@ -35,20 +26,20 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }
 
 #Preview("Large Text") {
-    ContentView()
+    HomeView()
         .environment(\.sizeCategory, .accessibilityLarge)
 }
 
 #Preview("Extra Extra Large Text") {
-    ContentView()
+    HomeView()
         .environment(\.sizeCategory, .accessibilityExtraExtraLarge)
 }
 
 #Preview("Extra Extra Extra Large Text") {
-    ContentView()
+    HomeView()
         .environment(\.sizeCategory, .accessibilityExtraExtraExtraLarge)
 }
