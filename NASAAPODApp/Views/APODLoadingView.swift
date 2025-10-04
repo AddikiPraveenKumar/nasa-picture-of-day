@@ -8,23 +8,29 @@
 import SwiftUI
 
 struct APODLoadingView: View {
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
+    
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: scaledSpacing(16)) {
             ProgressView()
-                .scaleEffect(1.2)
+                .scaleEffect(dynamicTypeSize.isAccessibilitySize ? 1.5 : 1.2)
             
-            Text("Loading Astronomy Picture...")
+            Text("Loading...")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
-            
-            Text("Fetching data from NASA")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Loading astronomy picture")
+    }
+    
+    private func scaledSpacing(_ base: CGFloat) -> CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? base * 1.5 : base
     }
 }
 
-#Preview {
-    APODLoadingView()
+extension DynamicTypeSize {
+    var isAccessibilitySize: Bool {
+        self >= .accessibility1
+    }
 }

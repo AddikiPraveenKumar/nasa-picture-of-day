@@ -5,6 +5,7 @@
 //  Created by Praveen UK on 04/10/2025.
 //
 
+
 import SwiftUI
 
 struct APODDateBadge: View {
@@ -22,10 +23,14 @@ struct APODDateBadge: View {
                 )
                 .foregroundColor(.accentColor)
                 .cornerRadius(8)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             
             Spacer()
         }
         .padding(.horizontal)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Date: \(date)")
     }
 }
 

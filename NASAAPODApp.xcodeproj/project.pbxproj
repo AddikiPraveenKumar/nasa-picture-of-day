@@ -20,11 +20,8 @@
 		065875EB2E8DB0480093527D /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065875EA2E8DB0480093527D /* HomeView.swift */; };
 		065875ED2E8DB0490093527D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065875EC2E8DB0490093527D /* Assets.xcassets */; };
 		065875F02E8DB0490093527D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065875EF2E8DB0490093527D /* Preview Assets.xcassets */; };
-		065876192E8DB1330093527D /* APODDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876182E8DB1330093527D /* APODDetailView.swift */; };
-		0658761B2E8DB1460093527D /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658761A2E8DB1460093527D /* DatePickerView.swift */; };
 		065876212E8DB17C0093527D /* APODViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876202E8DB17C0093527D /* APODViewModel.swift */; };
 		065876272E8DB1B30093527D /* APOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876262E8DB1B30093527D /* APOD.swift */; };
-		065876292E8DD0890093527D /* APODContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876282E8DD0890093527D /* APODContentView.swift */; };
 		0658762C2E8DD5360093527D /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658762B2E8DD5360093527D /* VideoPlayerView.swift */; };
 		0658762F2E8DDFDE0093527D /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0658762E2E8DDFDE0093527D /* NetworkClientProtocol.swift */; };
 		065876312E8DDFED0093527D /* APODServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876302E8DDFED0093527D /* APODServiceProtocol.swift */; };
@@ -38,13 +35,14 @@
 		065876432E8DE1650093527D /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876422E8DE1650093527D /* ImageLoader.swift */; };
 		06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E422E91592700CAD94F /* Date+Extension.swift */; };
 		06B23E452E9159AA00CAD94F /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E442E9159A200CAD94F /* MediaType.swift */; };
-		06B23E482E9190A400CAD94F /* APODEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */; };
-		06B23E4A2E9190BE00CAD94F /* APODErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */; };
-		06B23E4C2E9190D400CAD94F /* APODExplanationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */; };
-		06B23E4E2E9190EC00CAD94F /* APODMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */; };
-		06B23E502E91911600CAD94F /* APODDateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E4F2E91911600CAD94F /* APODDateBadge.swift */; };
-		06B23E522E91912A00CAD94F /* APODErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E512E91912A00CAD94F /* APODErrorBanner.swift */; };
-		06B23E542E91914D00CAD94F /* APODLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E532E91914D00CAD94F /* APODLoadingView.swift */; };
+		06B23E582E919A8D00CAD94F /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E572E919A8D00CAD94F /* APODView.swift */; };
+		06B23E5A2E919F3E00CAD94F /* APODDatePickerSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E592E919F3E00CAD94F /* APODDatePickerSheet.swift */; };
+		06B23E5C2E919F5800CAD94F /* APODErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E5B2E919F5800CAD94F /* APODErrorStateView.swift */; };
+		06B23E5E2E919F6900CAD94F /* APODExplanationSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E5D2E919F6900CAD94F /* APODExplanationSection.swift */; };
+		06B23E602E919F9200CAD94F /* APODMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E5F2E919F9200CAD94F /* APODMediaView.swift */; };
+		06B23E622E919FA500CAD94F /* APODDateBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E612E919FA500CAD94F /* APODDateBadge.swift */; };
+		06B23E642E919FF800CAD94F /* APODErrorBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E632E919FF800CAD94F /* APODErrorBanner.swift */; };
+		06B23E662E91A01600CAD94F /* APODLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E652E91A01600CAD94F /* APODLoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,11 +79,8 @@
 		065875FF2E8DB0490093527D /* NASAAPODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NASAAPODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		065876032E8DB0490093527D /* NASAAPODAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppUITests.swift; sourceTree = "<group>"; };
 		065876052E8DB0490093527D /* NASAAPODAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NASAAPODAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		065876182E8DB1330093527D /* APODDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDetailView.swift; sourceTree = "<group>"; };
-		0658761A2E8DB1460093527D /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		065876202E8DB17C0093527D /* APODViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODViewModel.swift; sourceTree = "<group>"; };
 		065876262E8DB1B30093527D /* APOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APOD.swift; sourceTree = "<group>"; };
-		065876282E8DD0890093527D /* APODContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODContentView.swift; sourceTree = "<group>"; };
 		0658762B2E8DD5360093527D /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 		0658762E2E8DDFDE0093527D /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
 		065876302E8DDFED0093527D /* APODServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODServiceProtocol.swift; sourceTree = "<group>"; };
@@ -99,13 +94,14 @@
 		065876422E8DE1650093527D /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		06B23E422E91592700CAD94F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		06B23E442E9159A200CAD94F /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
-		06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODEmptyStateView.swift; sourceTree = "<group>"; };
-		06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorStateView.swift; sourceTree = "<group>"; };
-		06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODExplanationSection.swift; sourceTree = "<group>"; };
-		06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODMediaView.swift; sourceTree = "<group>"; };
-		06B23E4F2E91911600CAD94F /* APODDateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDateBadge.swift; sourceTree = "<group>"; };
-		06B23E512E91912A00CAD94F /* APODErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorBanner.swift; sourceTree = "<group>"; };
-		06B23E532E91914D00CAD94F /* APODLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODLoadingView.swift; sourceTree = "<group>"; };
+		06B23E572E919A8D00CAD94F /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
+		06B23E592E919F3E00CAD94F /* APODDatePickerSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDatePickerSheet.swift; sourceTree = "<group>"; };
+		06B23E5B2E919F5800CAD94F /* APODErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorStateView.swift; sourceTree = "<group>"; };
+		06B23E5D2E919F6900CAD94F /* APODExplanationSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODExplanationSection.swift; sourceTree = "<group>"; };
+		06B23E5F2E919F9200CAD94F /* APODMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODMediaView.swift; sourceTree = "<group>"; };
+		06B23E612E919FA500CAD94F /* APODDateBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODDateBadge.swift; sourceTree = "<group>"; };
+		06B23E632E919FF800CAD94F /* APODErrorBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODErrorBanner.swift; sourceTree = "<group>"; };
+		06B23E652E91A01600CAD94F /* APODLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODLoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,16 +237,15 @@
 		065876152E8DB0B90093527D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				06B23E532E91914D00CAD94F /* APODLoadingView.swift */,
-				06B23E512E91912A00CAD94F /* APODErrorBanner.swift */,
-				06B23E4F2E91911600CAD94F /* APODDateBadge.swift */,
-				06B23E4D2E9190EC00CAD94F /* APODMediaView.swift */,
-				06B23E4B2E9190D400CAD94F /* APODExplanationSection.swift */,
-				06B23E492E9190BE00CAD94F /* APODErrorStateView.swift */,
-				06B23E472E9190A400CAD94F /* APODEmptyStateView.swift */,
+				06B23E652E91A01600CAD94F /* APODLoadingView.swift */,
+				06B23E632E919FF800CAD94F /* APODErrorBanner.swift */,
+				06B23E612E919FA500CAD94F /* APODDateBadge.swift */,
+				06B23E5F2E919F9200CAD94F /* APODMediaView.swift */,
+				06B23E5D2E919F6900CAD94F /* APODExplanationSection.swift */,
+				06B23E5B2E919F5800CAD94F /* APODErrorStateView.swift */,
+				06B23E592E919F3E00CAD94F /* APODDatePickerSheet.swift */,
+				06B23E572E919A8D00CAD94F /* APODView.swift */,
 				065875EA2E8DB0480093527D /* HomeView.swift */,
-				065876182E8DB1330093527D /* APODDetailView.swift */,
-				065876282E8DD0890093527D /* APODContentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -278,7 +273,6 @@
 		06B23E462E91704D00CAD94F /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				0658761A2E8DB1460093527D /* DatePickerView.swift */,
 				0658762B2E8DD5360093527D /* VideoPlayerView.swift */,
 			);
 			path = UIComponents;
@@ -418,30 +412,28 @@
 				06B23E452E9159AA00CAD94F /* MediaType.swift in Sources */,
 				0658763F2E8DE1490093527D /* APODCacheService.swift in Sources */,
 				065876372E8DE0220093527D /* ImageLoaderProtocol.swift in Sources */,
+				06B23E5A2E919F3E00CAD94F /* APODDatePickerSheet.swift in Sources */,
+				06B23E662E91A01600CAD94F /* APODLoadingView.swift in Sources */,
 				065876332E8DE0000093527D /* APODCacheProtocol.swift in Sources */,
-				06B23E522E91912A00CAD94F /* APODErrorBanner.swift in Sources */,
 				0658763D2E8DE13B0093527D /* APODNetworkService.swift in Sources */,
-				06B23E4E2E9190EC00CAD94F /* APODMediaView.swift in Sources */,
 				065876212E8DB17C0093527D /* APODViewModel.swift in Sources */,
 				065875EB2E8DB0480093527D /* HomeView.swift in Sources */,
-				06B23E482E9190A400CAD94F /* APODEmptyStateView.swift in Sources */,
 				065876352E8DE0120093527D /* ImageCacheProtocol.swift in Sources */,
-				06B23E502E91911600CAD94F /* APODDateBadge.swift in Sources */,
 				065876272E8DB1B30093527D /* APOD.swift in Sources */,
 				065876412E8DE1570093527D /* ImageCacheService.swift in Sources */,
 				065876432E8DE1650093527D /* ImageLoader.swift in Sources */,
-				065876192E8DB1330093527D /* APODDetailView.swift in Sources */,
 				0658762F2E8DDFDE0093527D /* NetworkClientProtocol.swift in Sources */,
 				065876312E8DDFED0093527D /* APODServiceProtocol.swift in Sources */,
-				06B23E4C2E9190D400CAD94F /* APODExplanationSection.swift in Sources */,
-				06B23E4A2E9190BE00CAD94F /* APODErrorStateView.swift in Sources */,
-				065876292E8DD0890093527D /* APODContentView.swift in Sources */,
-				0658761B2E8DB1460093527D /* DatePickerView.swift in Sources */,
-				06B23E542E91914D00CAD94F /* APODLoadingView.swift in Sources */,
 				0658763B2E8DE12B0093527D /* NetworkClient.swift in Sources */,
+				06B23E582E919A8D00CAD94F /* APODView.swift in Sources */,
+				06B23E5E2E919F6900CAD94F /* APODExplanationSection.swift in Sources */,
 				0658762C2E8DD5360093527D /* VideoPlayerView.swift in Sources */,
+				06B23E622E919FA500CAD94F /* APODDateBadge.swift in Sources */,
+				06B23E5C2E919F5800CAD94F /* APODErrorStateView.swift in Sources */,
+				06B23E642E919FF800CAD94F /* APODErrorBanner.swift in Sources */,
 				06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */,
 				065875E92E8DB0480093527D /* NASAAPODAppApp.swift in Sources */,
+				06B23E602E919F9200CAD94F /* APODMediaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

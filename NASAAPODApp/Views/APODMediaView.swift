@@ -11,82 +11,70 @@ struct APODMediaView: View {
     let apod: APOD
     let cachedImage: UIImage?
     let isLoadingImage: Bool
-    let hasError: Bool
-    let height: CGFloat
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     var body: some View {
         Group {
             if apod.isVideo, let videoURL = apod.videoURL {
                 VideoPlayerView(url: videoURL)
-                    .frame(height: height)
+                    .frame(height: mediaHeight)
                     .cornerRadius(12)
-                    .padding(.horizontal)
+                    .accessibilityLabel("Video: \(apod.title)")
+                    .accessibilityAddTraits(.startsMediaSession)
             } else {
-                ZStack {
-                    if let image = cachedImage {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(12)
-                    } else if isLoadingImage {
-                        imageLoadingPlaceholder
-                    } else {
-                        imageUnavailablePlaceholder
-                    }
-                }
-                .padding(.horizontal)
+                imageView
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    private var imageView: some View {
+        ZStack {
+            if let image = cachedImage {
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(12)
+                    .accessibilityLabel("Image: \(apod.title)")
+                    .accessibilityAddTraits(.isImage)
+            } else if isLoadingImage {
+                placeholderView(
+                    icon: nil,
+                    text: "Loading image...",
+                    showProgress: true
+                )
+                .accessibilityLabel("Loading image")
+            } else {
+                placeholderView(
+                    icon: "photo",
+                    text: "No image available",
+                    showProgress: false
+                )
+                .accessibilityLabel("No image available")
             }
         }
     }
     
-    private var imageLoadingPlaceholder: some View {
+    private func placeholderView(
+        icon: String?,
+        text: String,
+        showProgress: Bool
+    ) -> some View {
         Rectangle()
-            .fill(
-                LinearGradient(
-                    colors: colorScheme == .dark
-                        ? [Color(white: 0.15), Color(white: 0.2)]
-                        : [Color.secondary.opacity(0.1), Color.secondary.opacity(0.2)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .frame(height: height)
+            .fill(Color.secondary.opacity(0.1))
+            .frame(height: mediaHeight)
             .overlay(
-                VStack(spacing: 12) {
-                    ProgressView()
+                VStack(spacing: scaledSpacing(8)) {
+                    if showProgress {
+                        ProgressView()
+                            .scaleEffect(dynamicTypeSize.isAccessibilitySize ? 1.3 : 1.0)
+                    } else if let icon = icon {
+                        Image(systemName: icon)
+                            .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 40 : 50))
+                            .foregroundColor(.secondary)
+                    }
                     
-                    Text("Downloading image...")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                    
-                    Text("This may take a moment")
-                        .font(.caption2)
-                        .foregroundColor(.secondary.opacity(0.7))
-                }
-            )
-            .cornerRadius(12)
-    }
-    
-    private var imageUnavailablePlaceholder: some View {
-        Rectangle()
-            .fill(
-                LinearGradient(
-                    colors: colorScheme == .dark
-                        ? [Color(white: 0.15), Color(white: 0.25)]
-                        : [Color.gray.opacity(0.2), Color.gray.opacity(0.3)],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .frame(height: height)
-            .overlay(
-                VStack(spacing: 12) {
-                    Image(systemName: "photo.fill.on.rectangle.fill")
-                        .font(.system(size: 50))
-                        .foregroundColor(.gray)
-                    
-                    Text(hasError ? "Image from cache unavailable" : "No image available")
+                    Text(text)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -95,23 +83,27 @@ struct APODMediaView: View {
             )
             .cornerRadius(12)
     }
+    
+    private var mediaHeight: CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? 200 : 250
+    }
+    
+    private func scaledSpacing(_ base: CGFloat) -> CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? base * 1.5 : base
+    }
 }
 
 #Preview {
-    VStack {
-        APODMediaView(
-            apod: APOD(
-                date: "2024-10-05",
-                title: "Test",
-                explanation: "Test",
-                url: "https://example.com/image.jpg",
-                mediaType: .image,
-                hdurl: nil
-            ),
-            cachedImage: nil,
-            isLoadingImage: true,
-            hasError: false,
-            height: 250
-        )
-    }
+    APODMediaView(
+        apod: APOD(
+            date: "2024-10-05",
+            title: "Test Image",
+            explanation: "Test",
+            url: "https://example.com/image.jpg",
+            mediaType: .image,
+            hdurl: nil
+        ),
+        cachedImage: nil,
+        isLoadingImage: true
+    )
 }

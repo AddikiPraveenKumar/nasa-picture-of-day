@@ -10,26 +10,32 @@ import SwiftUI
 struct APODExplanationSection: View {
     let explanation: String
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: scaledSpacing(12)) {
             Label("Explanation", systemImage: "text.alignleft")
                 .font(.headline)
-                .foregroundColor(.primary)
+                .accessibilityAddTraits(.isHeader)
             
             Text(explanation)
                 .font(.body)
                 .foregroundColor(.secondary)
-                .lineSpacing(4)
+                .lineSpacing(scaledSpacing(4))
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
         .background(
-            colorScheme == .dark
-                ? Color.secondary.opacity(0.15)
-                : Color.secondary.opacity(0.1)
+            Color.secondary.opacity(colorScheme == .dark ? 0.15 : 0.1)
         )
         .cornerRadius(12)
         .padding(.horizontal)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Explanation: \(explanation)")
+    }
+    
+    private func scaledSpacing(_ base: CGFloat) -> CGFloat {
+        dynamicTypeSize.isAccessibilitySize ? base * 1.5 : base
     }
 }
 

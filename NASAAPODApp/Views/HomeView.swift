@@ -10,17 +10,14 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         TabView {
-            APODDetailView()
+            APODView()
                 .tabItem {
-                    Label("Today", systemImage: "star.fill")
+                    Label("APOD", systemImage: "star.fill")
                 }
-                .accessibilityLabel("Today's astronomy picture")
-            
-            DatePickerView()
+            Text("More Items")
                 .tabItem {
-                    Label("Browse", systemImage: "calendar")
+                    Label("More", systemImage: "ellipsis")
                 }
-                .accessibilityLabel("Browse astronomy pictures by date")
         }
     }
 }
