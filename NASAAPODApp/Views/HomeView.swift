@@ -14,7 +14,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("APOD", systemImage: "star.fill")
                 }
-            Text("More Items")
+            Text("Future Expand")
                 .tabItem {
                     Label("More", systemImage: "ellipsis")
                 }
