@@ -66,7 +66,7 @@ final class NetworkServiceTests: XCTestCase {
         """
         mockClient.dataToReturn = json.data(using: .utf8)!
         mockClient.responseToReturn = HTTPURLResponse(
-            url: URL(string: "https://api.nasa.gov")!,
+            url: URL(string: "https://ap")!,
             statusCode: 200,
             httpVersion: nil,
             headerFields: nil

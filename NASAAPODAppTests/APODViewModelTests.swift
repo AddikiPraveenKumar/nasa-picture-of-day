@@ -192,18 +192,18 @@ final class APODViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.isLoadingImage) // Should be false after completion
     }
     
-    // MARK: - Helper Methods - FIXED: Now uses MediaType enum
+    // MARK: - Helper Methods
     
     private func createTestAPOD(
         title: String,
-        mediaType: MediaType  // ← Changed from String to MediaType
+        mediaType: MediaType
     ) -> APOD {
         APOD(
             date: "2024-01-01",
             title: title,
             explanation: "Test explanation",
             url: "https://example.com/image.jpg",
-            mediaType: mediaType,  // ← Now uses the parameter!
+            mediaType: mediaType, 
             hdurl: mediaType == .image ? "https://example.com/hd.jpg" : nil
         )
     }
