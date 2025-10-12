@@ -191,29 +191,7 @@ final class APODViewModelTests: XCTestCase {
         // Then - Image loading state was managed
         XCTAssertFalse(viewModel.isLoadingImage) // Should be false after completion
     }
-    
-    // MARK: - Helper Methods
-    
-    private func createTestAPOD(
-        title: String,
-        mediaType: MediaType
-    ) -> APOD {
-        APOD(
-            date: "2024-01-01",
-            title: title,
-            explanation: "Test explanation",
-            url: "https://example.com/image.jpg",
-            mediaType: mediaType, 
-            hdurl: mediaType == .image ? "https://example.com/hd.jpg" : nil
-        )
-    }
-    
-    private func createTestImage() -> UIImage {
-        UIImage(systemName: "star.fill")!
-    }
-    
-    // MARK: - Additional Coverage Tests
-    
+        
     @MainActor
     func testLoadAPOD_CachedVideoOnFailure() async {
         // Given
@@ -280,5 +258,24 @@ final class APODViewModelTests: XCTestCase {
         // Then
         XCTAssertNil(mockAPODService.requestedDate)
         XCTAssertEqual(viewModel.currentAPOD, testAPOD)
+    }
+    // MARK: - Helper Methods
+
+    private func createTestAPOD(
+        title: String,
+        mediaType: MediaType
+    ) -> APOD {
+        APOD(
+            date: "2024-01-01",
+            title: title,
+            explanation: "Test explanation",
+            url: "https://example.com/image.jpg",
+            mediaType: mediaType,
+            hdurl: mediaType == .image ? "https://example.com/hd.jpg" : nil
+        )
+    }
+
+    private func createTestImage() -> UIImage {
+        UIImage(systemName: "star.fill")!
     }
 }
