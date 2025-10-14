@@ -1,11 +1,10 @@
 //
-//  YouTubePlayerView.swift
+//  VideoPlayerView.swift
 //  NASAAPODApp
 //
 //  Created by Praveen UK on 01/10/2025.
 //
 import SwiftUI
-import AVKit
 import WebKit
 
 struct VideoPlayerView: UIViewRepresentable {

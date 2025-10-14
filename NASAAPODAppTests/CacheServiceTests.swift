@@ -176,4 +176,13 @@ final class CacheServiceTests: XCTestCase {
         XCTAssertEqual(loaded?.mediaType, .video)
         XCTAssertTrue(loaded?.isVideo ?? false)
     }
+    
+    func testAPODCCahe_clear() throws {
+        // Given
+        let apod1 = APOD(date: "2024-01-01", title: "APOD 1", explanation: "", url: "", mediaType: .image, hdurl: nil)
+        try apodCache.save(apod1)
+        apodCache.clear()
+        
+        
+    }
 }

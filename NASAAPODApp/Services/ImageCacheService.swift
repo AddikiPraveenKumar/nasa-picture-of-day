@@ -32,7 +32,7 @@ class ImageCacheService: ImageCacheProtocol {
         let fileURL = imageDirectory.appendingPathComponent(filename)
         
         try? imageData.write(to: fileURL)
-        print("✅ Image cached to disk")
+        print("Image cached to disk")
     }
     
     func load(forKey key: String) -> UIImage? {
@@ -49,7 +49,7 @@ class ImageCacheService: ImageCacheProtocol {
             return nil
         }
         
-        print("✅ Image loaded from disk cache")
+        print("Image loaded from disk cache")
         return image
     }
     

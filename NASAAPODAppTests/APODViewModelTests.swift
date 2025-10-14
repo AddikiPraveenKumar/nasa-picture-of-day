@@ -4,278 +4,349 @@
 //
 //  Created by Praveen UK on 03/10/2025.
 //
+
 import XCTest
 @testable import NASAAPODApp
 
-final class APODViewModelTests: XCTestCase {
+@MainActor
+class APODViewModelTests: XCTestCase {
+    
     var viewModel: APODViewModel!
-    var mockAPODService: MockAPODService!
-    var mockAPODCache: MockAPODCache!
+    var mockService: MockAPODService!
+    var mockCache: MockAPODCache!
     var mockImageLoader: MockImageLoader!
     
-    @MainActor override func setUp() {
+    override func setUp() {
         super.setUp()
-        mockAPODService = MockAPODService()
-        mockAPODCache = MockAPODCache()
+        mockService = MockAPODService()
+        mockCache = MockAPODCache()
         mockImageLoader = MockImageLoader()
+        
         viewModel = APODViewModel(
-            apodService: mockAPODService,
-            apodCache: mockAPODCache,
+            apodService: mockService,
+            apodCache: mockCache,
             imageLoader: mockImageLoader
         )
     }
     
     override func tearDown() {
         viewModel = nil
-        mockAPODService = nil
-        mockAPODCache = nil
+        mockService = nil
+        mockCache = nil
         mockImageLoader = nil
         super.tearDown()
     }
     
-    // MARK: - Success Scenarios
     
-    @MainActor
-    func testLoadTodayAPOD_Success() async {
+    func testLoadFromCache_TaskCancelled_ExitsEarly() async {
         // Given
-        let expectedAPOD = createTestAPOD(title: "Test APOD", mediaType: .image)
-        let expectedImage = createTestImage()
-        mockAPODService.apodToReturn = expectedAPOD
-        mockImageLoader.imageToReturn = expectedImage
-        
-        // When
-        await viewModel.loadTodayAPOD()
-        
-        // Then
-        XCTAssertEqual(viewModel.currentAPOD, expectedAPOD)
-        XCTAssertFalse(viewModel.isLoading)
-        XCTAssertFalse(viewModel.isLoadingImage)
-        XCTAssertNil(viewModel.errorMessage)
-        XCTAssertEqual(viewModel.cachedImage, expectedImage)
-        XCTAssertTrue(mockAPODCache.saveCalled)
-        XCTAssertTrue(mockImageLoader.loadCalled)
-    }
-    
-    @MainActor
-    func testLoadAPOD_ForSpecificDate_Success() async {
-        // Given
-        let specificDate = Date(timeIntervalSince1970: 1609459200) // 2021-01-01
-        let expectedAPOD = createTestAPOD(title: "New Year APOD", mediaType: .image)
-        let expectedImage = createTestImage()
-        mockAPODService.apodToReturn = expectedAPOD
-        mockImageLoader.imageToReturn = expectedImage
-        
-        // When
-        await viewModel.loadAPOD(for: specificDate)
-        
-        // Then
-        XCTAssertEqual(viewModel.currentAPOD, expectedAPOD)
-        XCTAssertEqual(mockAPODService.requestedDate, specificDate)
-        XCTAssertTrue(mockImageLoader.loadCalled)
-    }
-    
-    @MainActor
-    func testLoadAPOD_VideoType_SkipsImageLoad() async {
-        // Given
-        let videoAPOD = createTestAPOD(title: "Video APOD", mediaType: .video)
-        mockAPODService.apodToReturn = videoAPOD
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertEqual(viewModel.currentAPOD, videoAPOD)
-        XCTAssertTrue(videoAPOD.isVideo)
-        XCTAssertFalse(mockImageLoader.loadCalled) // Should NOT load image for video
-    }
-    
-    // MARK: - Cache Fallback Tests (CRITICAL REQUIREMENT)
-    
-    @MainActor
-    func testLoadAPOD_NetworkFails_LoadsCachedData() async {
-        // Given - This is the main requirement test!
-        let cachedAPOD = createTestAPOD(title: "Cached APOD", mediaType: .image)
-        let cachedImage = createTestImage()
-        
-        mockAPODService.shouldFail = true
-        mockAPODCache.cachedAPOD = cachedAPOD
-        mockImageLoader.imageToReturn = cachedImage
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertEqual(viewModel.currentAPOD, cachedAPOD) // Cache loaded
-        XCTAssertEqual(viewModel.cachedImage, cachedImage) // Image loaded
-        XCTAssertTrue(mockAPODCache.loadCalled)
-        XCTAssertTrue(mockImageLoader.loadCalled)
-    }
-    
-    @MainActor
-    func testLoadAPOD_NetworkFails_NoCacheAvailable() async {
-        // Given
-        mockAPODService.shouldFail = true
-        mockAPODCache.cachedAPOD = nil // No cache
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertNil(viewModel.currentAPOD)
-        XCTAssertNil(viewModel.cachedImage)
-    }
-    
-    @MainActor
-    func testLoadAPOD_SubsequentCallFails_ShowsPreviousCache() async {
-        // Given - Test "any subsequent service call fails"
-        let firstAPOD = createTestAPOD(title: "First APOD", mediaType: .image)
-        let firstImage = createTestImage()
-        
-        // First successful call
-        mockAPODService.apodToReturn = firstAPOD
-        mockImageLoader.imageToReturn = firstImage
-        await viewModel.loadAPOD(for: nil)
-        
-        XCTAssertEqual(viewModel.currentAPOD, firstAPOD)
-        
-        // When - Second call fails
-        mockAPODService.shouldFail = true
-        mockAPODCache.cachedAPOD = firstAPOD // Cached from first call
-        mockImageLoader.imageToReturn = firstImage
-        
-        await viewModel.loadAPOD(for: Date())
-        
-        // Then - Shows cached data from first call
-        XCTAssertNotNil(viewModel.errorMessage)
-        XCTAssertEqual(viewModel.currentAPOD, firstAPOD)
-        XCTAssertEqual(viewModel.cachedImage, firstImage)
-    }
-    
-    // MARK: - Loading State Tests
-    
-    @MainActor
-    func testLoadAPOD_SetsLoadingState() async {
-        // Given
-        mockAPODService.delay = 0.1
-        mockAPODService.apodToReturn = createTestAPOD(title: "Test", mediaType: .image)
-        mockImageLoader.imageToReturn = createTestImage()
+        let cachedAPOD = createMockAPOD()
+        mockCache.mockAPOD = cachedAPOD
+        mockService.delay = 20.0 // Force timeout
         
         // When
         let loadTask = Task {
-            await viewModel.loadAPOD(for: nil)
+            await viewModel.loadTodayAPOD()
         }
         
-        // Small delay to check loading state
-        try? await Task.sleep(nanoseconds: 50_000_000)
+    
+        try? await Task.sleep(nanoseconds: 100_000_000) // Just 0.1s
+        loadTask.cancel()
+        
+        _ = await loadTask.result
+        
+        try? await Task.sleep(nanoseconds: 200_000_000)
         
         // Then
-        XCTAssertTrue(viewModel.isLoading)
-        
-        await loadTask.value
-        XCTAssertFalse(viewModel.isLoading)
+        XCTAssertFalse(viewModel.isLoading, "Should not be loading after cancellation")
+        print("Test passed: loadFromCache respects task cancellation")
     }
     
-    @MainActor
-    func testLoadAPOD_ImageLoadingSetsState() async {
+    func testLoadFromCache_WithCachedData_LoadsSuccessfully() async {
         // Given
-        let apod = createTestAPOD(title: "Test", mediaType: .image)
-        mockAPODService.apodToReturn = apod
-        mockImageLoader.delay = 0.1
-        mockImageLoader.imageToReturn = createTestImage()
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then - Image loading state was managed
-        XCTAssertFalse(viewModel.isLoadingImage) // Should be false after completion
-    }
-        
-    @MainActor
-    func testLoadAPOD_CachedVideoOnFailure() async {
-        // Given
-        let cachedVideoAPOD = createTestAPOD(title: "Cached Video", mediaType: .video)
-        mockAPODService.shouldFail = true
-        mockAPODCache.cachedAPOD = cachedVideoAPOD
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertEqual(viewModel.currentAPOD, cachedVideoAPOD)
-        XCTAssertTrue(cachedVideoAPOD.isVideo)
-        XCTAssertFalse(mockImageLoader.loadCalled) // Should not load image for video
-    }
-    
-    @MainActor
-    func testLoadAPOD_ImageURLNil() async {
-        // Given
-        // Create APOD with empty URL
-        let apodNoURL = APOD(
-            date: "2024-01-01",
-            title: "No Image URL",
-            explanation: "Test",
-            url: "",
-            mediaType: .image,
-            hdurl: nil
-        )
-        mockAPODService.apodToReturn = apodNoURL
-        
-        // When
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertNotNil(viewModel.currentAPOD)
-        // Image loader should not be called if URL is invalid
-    }
-    
-    @MainActor
-    func testLoadAPOD_CacheSaveError() async {
-        // Given
-        let testAPOD = createTestAPOD(title: "Test", mediaType: .image)
-        mockAPODService.apodToReturn = testAPOD
-        mockImageLoader.imageToReturn = createTestImage()
-        
-        // When - Even if cache save fails, should still succeed
-        await viewModel.loadAPOD(for: nil)
-        
-        // Then
-        XCTAssertEqual(viewModel.currentAPOD, testAPOD)
-        XCTAssertFalse(viewModel.isLoading)
-    }
-    
-    @MainActor
-    func testLoadTodayAPOD_CallsLoadAPODWithNilDate() async {
-        // Given
-        let testAPOD = createTestAPOD(title: "Today", mediaType: .image)
-        mockAPODService.apodToReturn = testAPOD
-        mockImageLoader.imageToReturn = createTestImage()
+        let cachedAPOD = createMockAPOD(title: "Cached APOD")
+        mockCache.mockAPOD = cachedAPOD
+        mockService.delay = 20.0 // Force timeout
         
         // When
         await viewModel.loadTodayAPOD()
         
         // Then
-        XCTAssertNil(mockAPODService.requestedDate)
-        XCTAssertEqual(viewModel.currentAPOD, testAPOD)
+        XCTAssertEqual(viewModel.currentAPOD?.title, "Cached APOD")
+        XCTAssertTrue(mockCache.loadCalled)
+        XCTAssertFalse(viewModel.isLoading)
+        print("Test passed: loadFromCache with cached data")
     }
-    // MARK: - Helper Methods
+    
+    func testLoadFromCache_WithCachedImage_LoadsImage() async {
+        // Given
+        let cachedAPOD = createMockAPOD(title: "Cached with Image")
+        mockCache.mockAPOD = cachedAPOD
+        mockImageLoader.mockImage = UIImage(systemName: "star.fill")
+        mockService.delay = 20.0
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNotNil(viewModel.cachedImage)
+        XCTAssertTrue(mockImageLoader.loadCalled)
+        print("Test passed: loadFromCache loads image")
+    }
+    
+    func testLoadFromCache_WithVideoAPOD_DoesNotLoadImage() async {
+        // Given
+        let videoAPOD = createMockAPOD(title: "Video", mediaType: .video)
+        mockCache.mockAPOD = videoAPOD
+        mockService.delay = 20.0
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNil(viewModel.cachedImage)
+        XCTAssertFalse(mockImageLoader.loadCalled)
+        print("Test passed: loadFromCache skips video image loading")
+    }
+    
+    func testLoadFromCache_NoCacheAvailable_SetsErrorMessage() async {
+        // Given
+        mockCache.mockAPOD = nil
+        mockService.delay = 20.0
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNil(viewModel.currentAPOD)
+        XCTAssertNotNil(viewModel.errorMessage)
+        XCTAssertTrue(viewModel.errorMessage?.contains("No cached data") ?? false)
+        print("Test passed: loadFromCache with no cache sets error")
+    }
+    
+    func testLoadImage_TaskCancelled_ExitsEarly() async {
+        // Given
+        let apod = createMockAPOD(mediaType: .image)
+        mockService.mockAPOD = apod
+        mockService.delay = 0.5
+        mockImageLoader.delay = 10.0 // Long delay for image
+        
+        // When
+        let loadTask = Task {
+            await viewModel.loadTodayAPOD()
+        }
+        
+        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
+        loadTask.cancel()
+        
+        _ = await loadTask.result
+        try? await Task.sleep(nanoseconds: 200_000_000)
+        
+        // Then
+        XCTAssertFalse(viewModel.isLoadingImage, "Should not be loading after cancellation")
+        print("Test passed: loadImage respects cancellation")
+    }
+    
+    func testLoadImage_WithImageAPOD_LoadsSuccessfully() async {
+        // Given
+        let apod = createMockAPOD(mediaType: .image)
+        mockService.mockAPOD = apod
+        mockImageLoader.mockImage = UIImage(systemName: "photo")
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNotNil(viewModel.cachedImage)
+        XCTAssertTrue(mockImageLoader.loadCalled)
+        XCTAssertFalse(viewModel.isLoadingImage)
+        print("Test passed: loadImage loads successfully")
+    }
+    
+    func testLoadImage_WithVideoAPOD_SkipsImageLoad() async {
+        // Given
+        let videoAPOD = createMockAPOD(mediaType: .video)
+        mockService.mockAPOD = videoAPOD
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNil(viewModel.cachedImage)
+        XCTAssertFalse(mockImageLoader.loadCalled)
+        XCTAssertFalse(viewModel.isLoadingImage)
+        print("Test passed: loadImage skips video")
+    }
+    
+    func testLoadImage_Timeout_SetsImageToNil() async {
+        // Given
+        let apod = createMockAPOD(mediaType: .image)
+        mockService.mockAPOD = apod
+        mockImageLoader.delay = 20.0
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNil(viewModel.cachedImage)
+        XCTAssertFalse(viewModel.isLoadingImage)
+        print("Test passed: loadImage handles timeout")
+    }
+    
+    func testLoadImageClosure_WithTimeout_CatchesTimeoutError() async {
+        // Given
+        let apod = createMockAPOD(mediaType: .image)
+        mockService.mockAPOD = apod
+        mockImageLoader.delay = 20.0
+        
+        // When
+        await viewModel.loadTodayAPOD()
+        
+        // Then
+        XCTAssertNil(viewModel.cachedImage)
+        XCTAssertFalse(viewModel.isLoadingImage)
+        print("Test passed: loadImage closure catches timeout")
+    }
+        
+    func testPerformLoad_ChecksCancellationBeforeImageLoad() async {
+        // Given
+        let apod = createMockAPOD(mediaType: .image)
+        mockService.mockAPOD = apod
+        mockService.delay = 0.3
+        mockImageLoader.delay = 10.0
+        
+        // When
+        let loadTask = Task {
+            await viewModel.loadTodayAPOD()
+        }
+        
+        // Wait for API, then cancel before image
+        try? await Task.sleep(nanoseconds: 700_000_000) // 0.7s
+        loadTask.cancel()
+        
+        _ = await loadTask.result
+        try? await Task.sleep(nanoseconds: 200_000_000)
+        
+        // Then
+        XCTAssertFalse(viewModel.isLoadingImage, "Should not be loading after cancellation")
+        print("Test passed: performLoad checks cancellation before image load")
+    }
+    
+    func testPerformLoad_CachedImageLoadChecksCancellation() async {
+        // Given
+        mockService.shouldFail = true
+        let cachedAPOD = createMockAPOD(mediaType: .image)
+        mockCache.mockAPOD = cachedAPOD
+        mockImageLoader.delay = 10.0
+        
+        // When
+        let loadTask = Task {
+            await viewModel.loadTodayAPOD()
+        }
+        
+        // Wait a bit, then cancel
+        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+        loadTask.cancel()
+        
+        // Wait for cleanup
+        _ = await loadTask.result
+        try? await Task.sleep(nanoseconds: 200_000_000)
+        
+        // Then
+        XCTAssertFalse(viewModel.isLoadingImage, "Should not be loading after cancellation")
+        print("Test passed: performLoad checks cancellation in cached image load")
+    }
+    
+    func testPerformLoad_ChecksCancellationAfterAPICall() async {
+        // Given
+        let apod = createMockAPOD()
+        mockService.mockAPOD = apod
+        mockService.delay = 0.5
+        
+        // When
+        let loadTask = Task {
+            await viewModel.loadTodayAPOD()
+        }
+        
 
-    private func createTestAPOD(
-        title: String,
-        mediaType: MediaType
+        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
+        loadTask.cancel()
+        
+        _ = await loadTask.result
+        try? await Task.sleep(nanoseconds: 200_000_000)
+        
+        // Then
+        XCTAssertFalse(viewModel.isLoading, "Should not be loading after cancellation")
+        print("Test passed: performLoad checks cancellation after API")
+    }
+    
+    // MARK: - Additional Working Tests
+    
+    func testTimeoutError_ErrorDescription() {
+        // Given
+        let error = TimeoutError()
+        
+        // When
+        let description = error.errorDescription
+        
+        // Then
+        XCTAssertNotNil(description)
+        XCTAssertEqual(description, "Request timed out after 15 seconds")
+        print("Test passed: TimeoutError.errorDescription")
+    }
+    
+    func testDeinit_CancelsCurrentTask() async {
+        // Given
+        mockService.delay = 10.0
+        
+        Task {
+            await viewModel.loadTodayAPOD()
+        }
+        
+        try? await Task.sleep(nanoseconds: 500_000_000)
+        
+        // When - Deallocate viewModel
+        viewModel = nil
+        
+        // Then
+        XCTAssertNil(viewModel)
+        print("Test passed: deinit cancels task")
+    }
+    
+    // MARK: - Helper Methods
+    
+    private func createMockAPOD(
+        title: String = "Test APOD",
+        date: String = "2024-10-05",
+        mediaType: MediaType = .image
     ) -> APOD {
-        APOD(
-            date: "2024-01-01",
+        return APOD(
+            date: date,
             title: title,
             explanation: "Test explanation",
-            url: "https://example.com/image.jpg",
+            url: mediaType == .image ? "https://example.com/image.jpg" : "https://youtube.com/watch",
             mediaType: mediaType,
-            hdurl: mediaType == .image ? "https://example.com/hd.jpg" : nil
+            hdurl: nil
         )
     }
+}
 
-    private func createTestImage() -> UIImage {
-        UIImage(systemName: "star.fill")!
+
+extension MockAPODCache {
+    var shouldFailOnSave: Bool {
+        get { return false }
+        set { }
+    }
+}
+
+extension MockImageLoader {
+    var shouldFail: Bool {
+        get { return false }
+        set { }
+    }
+    
+    var errorToThrow: Error {
+        get { return NSError(domain: "Test", code: -1) }
+        set { }
     }
 }

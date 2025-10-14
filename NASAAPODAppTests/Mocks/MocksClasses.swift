@@ -9,23 +9,21 @@ import Foundation
 import SwiftUI
 @testable import NASAAPODApp
 class MockAPODService: APODServiceProtocol {
-    var apodToReturn: APOD?
+    var mockAPOD: APOD?
     var shouldFail = false
-    var requestedDate: Date?
     var delay: TimeInterval = 0
+    var errorToThrow: Error = NetworkError.noData
     
     func fetchAPOD(for date: Date?) async throws -> APOD {
-        requestedDate = date
-        
         if delay > 0 {
-            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
         }
         
         if shouldFail {
-            throw NetworkError.networkError(NSError(domain: "Test", code: -1009))
+            throw errorToThrow
         }
         
-        guard let apod = apodToReturn else {
+        guard let apod = mockAPOD else {
             throw NetworkError.noData
         }
         
@@ -34,24 +32,43 @@ class MockAPODService: APODServiceProtocol {
 }
 
 class MockAPODCache: APODCacheProtocol {
-    var cachedAPOD: APOD?
+    var mockAPOD: APOD?
     var saveCalled = false
     var loadCalled = false
+    var clearCalled = false
+    var savedAPOD: APOD?
     
     func save(_ apod: APOD) throws {
         saveCalled = true
-        cachedAPOD = apod
+        savedAPOD = apod
     }
     
     func load() -> APOD? {
         loadCalled = true
-        return cachedAPOD
+        return mockAPOD
     }
     
     func clear() {
-        cachedAPOD = nil
+        clearCalled = true
     }
 }
+
+class MockImageLoader: ImageLoaderProtocol {
+    var mockImage: UIImage?
+    var loadCalled = false
+    var delay: TimeInterval = 0
+    
+    func loadImage(from url: URL) async -> UIImage? {
+        loadCalled = true
+        
+        if delay > 0 {
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+        }
+        
+        return mockImage ?? UIImage(systemName: "photo")
+    }
+}
+
 
 class MockImageCache: ImageCacheProtocol {
     var cachedImages: [String: UIImage] = [:]
@@ -70,22 +87,6 @@ class MockImageCache: ImageCacheProtocol {
     
     func clear() {
         cachedImages.removeAll()
-    }
-}
-
-class MockImageLoader: ImageLoaderProtocol {
-    var imageToReturn: UIImage?
-    var loadCalled = false
-    var delay: TimeInterval = 0
-    
-    func loadImage(from url: URL) async -> UIImage? {
-        loadCalled = true
-        
-        if delay > 0 {
-            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
-        }
-        
-        return imageToReturn
     }
 }
 
