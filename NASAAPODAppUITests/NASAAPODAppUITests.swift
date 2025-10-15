@@ -8,7 +8,7 @@
 import XCTest
 
 final class NASAAPODAppUITests: XCTestCase {
-
+  var app: XCUIApplication!
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -16,18 +16,23 @@ final class NASAAPODAppUITests: XCTestCase {
         continueAfterFailure = false
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
+        
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+   func test_home_screen_title() throws {
+    XCTAssertEqual(app.staticTexts["NASA APOD"].exists, false)
+    }
+    func test_tab_button_exists() throws {
+        let apodTab = app.tabBars.buttons["APOD"]
+        let futureTab = app.tabBars.buttons["Future"]
+        XCTAssert(apodTab.exists == false)
+        XCTAssert(futureTab.exists == false)
     }
 
     func testLaunchPerformance() throws {
