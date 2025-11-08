@@ -16,11 +16,20 @@
 default_platform(:ios)
 
 platform :ios do
+  desc "Run SwiftLint"
+  lane :lint do
+    swiftlint(
+      mode: :lint,
+      strict: true
+    )
+  end
+
   desc "Run tests"
   lane :test do
+    lint
     run_tests(
       scheme: "NASAAPODApp",
-      devices: ["iPhone 17"],
+      devices: ["iPhone 15"],
       clean: true
     )
   end

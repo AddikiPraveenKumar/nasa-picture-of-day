@@ -34,6 +34,8 @@
 		065876412E8DE1570093527D /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876402E8DE1570093527D /* ImageCacheService.swift */; };
 		065876432E8DE1650093527D /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065876422E8DE1650093527D /* ImageLoader.swift */; };
 		068B71112E9EBB27008B768E /* ConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B71102E9EBB27008B768E /* ConfigManager.swift */; };
+		068B71132E9FF6D9008B768E /* ListOfFav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B71122E9FF6C9008B768E /* ListOfFav.swift */; };
+		068B71152E9FFFD7008B768E /* FavViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068B71142E9FFFD7008B768E /* FavViewModel.swift */; };
 		06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E422E91592700CAD94F /* Date+Extension.swift */; };
 		06B23E452E9159AA00CAD94F /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E442E9159A200CAD94F /* MediaType.swift */; };
 		06B23E582E919A8D00CAD94F /* APODView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06B23E572E919A8D00CAD94F /* APODView.swift */; };
@@ -95,6 +97,8 @@
 		065876402E8DE1570093527D /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		065876422E8DE1650093527D /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		068B71102E9EBB27008B768E /* ConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigManager.swift; sourceTree = "<group>"; };
+		068B71122E9FF6C9008B768E /* ListOfFav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfFav.swift; sourceTree = "<group>"; };
+		068B71142E9FFFD7008B768E /* FavViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavViewModel.swift; sourceTree = "<group>"; };
 		06B23E422E91592700CAD94F /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		06B23E442E9159A200CAD94F /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		06B23E572E919A8D00CAD94F /* APODView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APODView.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				065876202E8DB17C0093527D /* APODViewModel.swift */,
+				068B71142E9FFFD7008B768E /* FavViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 		065876152E8DB0B90093527D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				068B71122E9FF6C9008B768E /* ListOfFav.swift */,
 				06B23E652E91A01600CAD94F /* APODLoadingView.swift */,
 				06B23E632E919FF800CAD94F /* APODErrorBanner.swift */,
 				06B23E612E919FA500CAD94F /* APODDateBadge.swift */,
@@ -299,6 +305,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 065876092E8DB0490093527D /* Build configuration list for PBXNativeTarget "NASAAPODApp" */;
 			buildPhases = (
+				06D1A3F72EBFEB980051218A /* ShellScript */,
 				065875E12E8DB0480093527D /* Sources */,
 				065875E22E8DB0480093527D /* Frameworks */,
 				065875E32E8DB0480093527D /* Resources */,
@@ -419,6 +426,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		06D1A3F72EBFEB980051218A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		065875E12E8DB0480093527D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -426,6 +453,7 @@
 			files = (
 				06B23E452E9159AA00CAD94F /* MediaType.swift in Sources */,
 				0658763F2E8DE1490093527D /* APODCacheService.swift in Sources */,
+				068B71152E9FFFD7008B768E /* FavViewModel.swift in Sources */,
 				065876372E8DE0220093527D /* ImageLoaderProtocol.swift in Sources */,
 				06B23E5A2E919F3E00CAD94F /* APODDatePickerSheet.swift in Sources */,
 				06B23E662E91A01600CAD94F /* APODLoadingView.swift in Sources */,
@@ -449,6 +477,7 @@
 				06B23E642E919FF800CAD94F /* APODErrorBanner.swift in Sources */,
 				06B23E432E91594B00CAD94F /* Date+Extension.swift in Sources */,
 				065875E92E8DB0480093527D /* NASAAPODAppApp.swift in Sources */,
+				068B71132E9FF6D9008B768E /* ListOfFav.swift in Sources */,
 				06B23E602E919F9200CAD94F /* APODMediaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
