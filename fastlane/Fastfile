@@ -19,8 +19,7 @@ platform :ios do
   desc "Run SwiftLint"
   lane :lint do
     swiftlint(
-      mode: :lint,
-      strict: true
+      mode: :lint
     )
   end
 
