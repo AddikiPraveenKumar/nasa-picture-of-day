@@ -74,8 +74,9 @@ final class APODModelTests: XCTestCase {
     }
     
     func testAPOD_Equatable() {
-        // Given
+        // Given - Use same ID for both
         let apod1 = APOD(
+            id: "test-id",  // ✅ Same ID
             date: "2024-01-01",
             title: "Test",
             explanation: "Test",
@@ -83,7 +84,9 @@ final class APODModelTests: XCTestCase {
             mediaType: .image,
             hdurl: nil
         )
+        
         let apod2 = APOD(
+            id: "test-id",  // ✅ Same ID
             date: "2024-01-01",
             title: "Test",
             explanation: "Test",
@@ -93,6 +96,6 @@ final class APODModelTests: XCTestCase {
         )
         
         // Then
-        XCTAssertEqual(apod1, apod2)
+        XCTAssertEqual(apod1, apod2)  // ✅ Now they're equal!
     }
 }
