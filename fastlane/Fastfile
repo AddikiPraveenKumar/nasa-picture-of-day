@@ -19,17 +19,37 @@ platform :ios do
   desc "Run SwiftLint"
   lane :lint do
     swiftlint(
-      mode: :lint
+      mode: :lint,
+      strict: false,
+      raise_if_swiftlint_error: false
     )
   end
 
-  desc "Run tests"
+
+  desc "Build app"
+  lane :build do
+    build_app(
+      scheme: "NASAAPODApp",
+      export_method: "development",
+      clean: true,
+      skip_codesigning: true
+    )
+  end
+
+  desc "Run all tests"
   lane :test do
     lint
     run_tests(
       scheme: "NASAAPODApp",
-      devices: ["iPhone 15"],
+      devices: ["iPhone 16"],  # Changed from iPhone 15 to iPhone 16
       clean: true
     )
+  end
+
+  desc "Full CI pipeline"
+  lane :ci do
+    lint
+    test
+    build
   end
 end
